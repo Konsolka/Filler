@@ -6,11 +6,12 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 12:41:19 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/10 13:51:25 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/10 17:53:29 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+#include <stdio.h>
 
 void	free_map(t_map *map, int offset)
 {
@@ -83,17 +84,17 @@ void	filler_loop(t_filler filler)
 	char	*str;
 	int		res;
 
-	while ((res == get_next_line(0, &str)) > -1)
+	while ((res = get_next_line(0, &str)) > -1)
 	{
 		if (!str)
 			continue ;
-		if (!ft_strncmp(str, "Plateau", 8))
+		if (!ft_strncmp(str, "Plateau ", 8))
 		{
 			read_map(str, 4, &filler.board);
 			if (!filler.init)
 				init_filler(&filler);
 		}
-		else if (!ft_strncmp(str, "Piece", 6))
+		else if (!ft_strncmp(str, "Piece ", 6))
 		{
 			read_map(str, 0, &filler.token);
 			place(filler);
@@ -102,19 +103,21 @@ void	filler_loop(t_filler filler)
 	}
 }
 
-int		main(void)
+int			main(void)
 {
 	t_filler	filler;
-	char		*c;
-	
+	char		*line;
+
 	ft_bzero(&filler, sizeof(t_filler));
-	c = NULL;
+	line = NULL;
 	filler.init = 0;
-	if (get_next_line(0, &c) > -1)
+	if (get_next_line(0, &line) && line && ft_strlen(line) > 10 &&
+			!ft_strncmp(line, "$$$ exec p", 9) &&
+			(line[10] == '1' || line[10] == '2'))
 	{
-		filler.player.id  = c[10] == '1' ? 'O' : 'X';
-		filler.enemy.id = c[10] == '1' ? 'X' : 'O';
-		ft_strdel(&c);
+		filler.player.id = (line[10] == '1' ? 'O' : 'X');
+		filler.enemy.id = (line[10] == '1' ? 'X' : 'O');
+		ft_strdel(&line);
 		filler_loop(filler);
 	}
 	else

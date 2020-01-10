@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 13:13:52 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/10 13:17:46 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/10 17:46:03 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include "libft.h"
 # include "get_next_line.h"
-
+# define MAX(A, B)(A > B ? A : B)
+# define MIN(A, B)(A < B ? A : B)
 typedef struct	s_point
 {
 	int		x;
@@ -49,5 +50,11 @@ typedef struct	s_filler
 	int			p_count;
 	int			e_count;
 }				t_filler;
+
+t_point		closest_pair(t_filler f);
+void	place(t_filler f);
+t_point		find_place(t_filler f);
+int		try_place(t_filler f, t_point point);
+int		place_around(t_filler f, t_point p, t_point *res);
 
 #endif

@@ -15,7 +15,7 @@ GREEN	:= "\033[32m"
 
 # srcs and obj
 
-SRCS		= main.c
+SRCS		= main.c algo.c placement.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 
