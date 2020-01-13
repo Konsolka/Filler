@@ -6,14 +6,13 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 12:41:19 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/10 17:53:29 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/13 17:44:05 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-#include <stdio.h>
 
-void	free_map(t_map *map, int offset)
+void	free_map(t_map *map)
 {
 	int		i;
 	char	*str;
@@ -23,18 +22,17 @@ void	free_map(t_map *map, int offset)
 	i = 0;
 	while (i < map->hieght)
 	{
-		str = map->data[i] - offset;
-		ft_strdel(&str);
+		ft_strdel(&map->data[i]);
 		i++;
 	}
-	ft_memdel((void **)&map->data);
+	ft_memdel((void **)map->data);
 }
 
 void	read_map(char *line, int offset, t_map *map)
 {
 	int		i;
 
-	free_map(map, offset);
+	free_map(map);
 	line = ft_strchr(line, ' ') + 1;
 	map->hieght = ft_atoi(line);
 	map->width = ft_atoi(ft_strchr(line, ' '));
@@ -44,12 +42,13 @@ void	read_map(char *line, int offset, t_map *map)
 		get_next_line(0, &line);
 		ft_strdel(&line);
 	}
-	map->data = ft_memalloc(map->hieght * sizeof(char *));
+	map->data = (char **)malloc(sizeof(char *) * map->hieght);
 	i = 0;
 	while (i < map->hieght)
 	{
 		get_next_line(0, &line);
-		map->data[i] = line + offset;
+		map->data[i] = ft_strdup(line + offset);
+		ft_strdel(&line);
 		i++;
 	}
 }
@@ -99,7 +98,8 @@ void	filler_loop(t_filler filler)
 			read_map(str, 0, &filler.token);
 			place(filler);
 		}
-		ft_strdel(&str);
+		if (str)
+			ft_strdel(&str);
 	}
 }
 

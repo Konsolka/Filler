@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 13:51:47 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/10 17:43:14 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/13 16:26:00 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int		place_around(t_filler f, t_point p, t_point *res)
 			res->y = p.y - offset.y;
 			if (f.token.data[offset.y][offset.x] == '*' &&
 					pos_valid(f, *res) && !try_place(f, *res))
+			{
 				return (1);
+			}
 			offset.x++;
 		}
 		offset.y++;

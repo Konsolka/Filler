@@ -6,7 +6,7 @@
 #    By: mburl <mburl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/04 19:30:25 by mburl             #+#    #+#              #
-#    Updated: 2020/01/10 11:44:38 by mburl            ###   ########.fr        #
+#    Updated: 2020/01/13 15:19:01 by mburl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,8 @@ SRCS	= ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	  ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c \
 	  ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c \
 	  ft_strsplit.c ft_strnch.c ft_intlen.c ft_countwords.c ft_chrcmp.c \
-	  ft_putstr_err.c ft_lstcount.c ft_lstrev.c get_next_line.c ft_pow.c \
-	  ft_strtab_free.c
+	  ft_putstr_err.c ft_lstcount.c ft_lstrev.c gnl.c ft_pow.c \
+	  ft_strtab_free.c ft_strmerge.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 

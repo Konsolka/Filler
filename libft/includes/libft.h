@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:39:05 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/10 11:45:02 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/13 15:18:45 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ size_t				ft_lstcount(t_list *lst);
 void				ft_lstrev(t_list **alst);
 double				ft_pow(double x, double y);
 void				ft_strtab_free(char **strtab);
+char				*ft_strmerge(char *a, char *b);
 
 #endif

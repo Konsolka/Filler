@@ -5,22 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/10 14:05:09 by mburl             #+#    #+#             */
-/*   Updated: 2019/10/18 11:25:55 by mburl            ###   ########.fr       */
+/*   Created: 2020/01/13 18:03:35 by mburl             #+#    #+#             */
+/*   Updated: 2020/01/13 18:03:36 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# include "libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <limits.h>
+# define BUFF_SIZE 4096
 
-# define BUFF_SIZE 32
-
-int		get_next_line(const int fd, char **line);
-
+typedef struct  s_gnl
+{
+        char            *buf;
+        int                     count;
+        int                     i;
+        int                     nl;
+        int                     fd;
+}                               t_gnl;
+int                             get_next_line(int const fd, char **line);
 #endif

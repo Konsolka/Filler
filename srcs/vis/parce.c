@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*   parce.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 20:50:52 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/13 11:17:51 by mburl            ###   ########.fr       */
+/*   Created: 2020/01/13 18:39:12 by mburl             #+#    #+#             */
+/*   Updated: 2020/01/13 18:43:51 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "filler.h"
 
-void	ft_memdel(void **ap)
+char	*parce_name(char *line)
 {
-	if (*ap)
-	{
-		free(*ap);
-		*ap = NULL;
-	}
+	char	*temp;
+	char	**temp_split;
+
+	temp = ft_strrchr(line, '/') + 1;
+	temp_split = ft_strsplit(temp, '.');
+	temp = ft_strdup(*temp_split);
+	ft_strtab_free(temp_split);
+	return (temp);
 }

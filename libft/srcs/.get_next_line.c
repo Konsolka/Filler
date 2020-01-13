@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 14:05:03 by mburl             #+#    #+#             */
-/*   Updated: 2019/10/18 11:25:50 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/13 15:03:27 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int		output(char **s, char **line, int ret, int fd)
 int				get_next_line(const int fd, char **line)
 {
 	int				ret;
-	static char		*s[OPEN_MAX];
+	static char		*s[4096];
 	char			buff[BUFF_SIZE + 1];
 	char			*temp;
 
@@ -64,7 +64,7 @@ int				get_next_line(const int fd, char **line)
 		else
 		{
 			temp = ft_strjoin(s[fd], buff);
-			free(s[fd]);
+			ft_strdel(&s[fd]);
 			s[fd] = temp;
 		}
 		if (ft_strchr(s[fd], '\n'))
