@@ -6,13 +6,17 @@
 #    By: mburl <mburl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/04 19:30:25 by mburl             #+#    #+#              #
-#    Updated: 2020/01/13 15:19:01 by mburl            ###   ########.fr        #
+#    Updated: 2020/01/20 14:43:28 by mburl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libft.a
 
-INCDIR	= ./includes/
+HEADER_LIST		= libft.h get_next_line.h
+INCDIR			= ./includes/
+HEADERS			= $(addprefix $(INCDIR), $(HEADER_LIST))
+
+INCLUDES		= -I $(INCDIR)
 SRCSDIR	= ./srcs/
 OBJDIR	= ./obj/
 
@@ -42,15 +46,15 @@ WAVE	:= "\033[36m"
 EOC		:= "\033[0m"
 GREEN	:= "\033[32m"
 
-all: obj $(NAME)
+all: obj $(NAME) $(HEADERS)
 
 obj:
 	@echo " - Creating dir $(OBJDIR)"
 	@mkdir -p $(OBJDIR)
 
-$(OBJDIR)%.o:$(SRCSDIR)%.c
+$(OBJDIR)%.o:$(SRCSDIR)%.c $(HEADERS)
 	@echo $(WAVE) " - Compiling $<  ->  $@" $(EOC)
-	@$(CC) $(CFLAGS) -I $(INCDIR) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
 $(NAME): $(OBJ)
 	@echo $(GREEN) " - Running $@" $(EOC)

@@ -6,11 +6,13 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 12:41:19 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/13 17:44:05 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/20 14:52:23 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+#include "libft.h"
+#include "get_next_line.h"
 
 void	free_map(t_map *map)
 {

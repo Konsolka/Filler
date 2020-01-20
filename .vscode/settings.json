@@ -1,6 +1,9 @@
 {
 	"files.associations": {
 		"stat.h": "c",
-		"filler.h": "c"
+		"filler.h": "c",
+		"get_next_line.h": "c",
+		"libft.h": "c",
+		"time.h": "c"
 	}
 }

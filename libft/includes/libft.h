@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:39:05 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/13 15:18:45 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/20 14:45:11 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <string.h>
 # include <stdlib.h>
-
 typedef struct		s_list
 {
 	void			*content;

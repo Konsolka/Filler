@@ -6,12 +6,12 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 17:05:33 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/10 17:45:01 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/20 14:52:47 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-
+#include "libft.h"
 
 void			create_arr(t_filler *f)
 {

@@ -6,11 +6,12 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 13:51:47 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/13 16:26:00 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/20 14:52:39 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+#include "libft.h"
 
 int		pos_valid(t_filler f, t_point p)
 {

@@ -17,13 +17,16 @@ GREEN	:= "\033[32m"
 # srcs and obj
 
 SRCS		= main.c algo.c placement.c
-SRCS_V		= main_vis.c parce.c
+SRCS_V		= main_vis.c parce.c drawing.c lst_work.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 OBJ_V		= $(addprefix $(OBJDIR_V),$(SRCS_V:.c=.o))
 
 # directories
+
+HEADER_LIST		= filler.h
 INCDIR			= ./includes/
+HEADERS			= $(addprefix $(INCDIR), $(HEADER_LIST))
 
 SRC_DIR			= ./srcs/filler/
 SRC_DIR_V		= ./srcs/vis/
@@ -32,13 +35,18 @@ OBJDIR			= ./obj/filler/
 OBJDIR_V		= ./obj/vis/
 
 # ft library
-FT				= ./libft/
-FT_LIB			= $(addprefix $(FT),libft.a)
-FT_INC			= -I ./libft/includes
-FT_LNK			= -L ./libft -l ft
 
+LIBFT			= $(LIBFT_DIRECTORY)libft.a
+LIBFT_DIRECTORY = ./libft/
+LIBFT_HEADERS	= $(LIBFT_DIRECTORY)includes/
+LIBFT_LINK		=  -lft -L$(LIBFT_DIRECTORY)
+# mlx library
+MLX_LINK		= -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
-all: obj $(FT_LIB) $(NAME) $(NAME_V)
+# include
+INCLUDES		= -I $(INCDIR) -I $(LIBFT_HEADERS)
+INCLUDES_V		= -I $(INCDIR) -I $(LIBFT_HEADERS) $(MLX_LINK)
+all: $(NAME) $(NAME_V)
 
 obj:
 	@echo " - Creating dir $(OBJDIR)"
@@ -46,24 +54,24 @@ obj:
 	@mkdir -p $(OBJDIR)
 	@mkdir -p $(OBJDIR_V)
 
-$(OBJDIR)%.o:$(SRC_DIR)%.c
+$(OBJDIR)%.o:$(SRC_DIR)%.c $(HEADERS)
 	@echo $(WAVE) " - Compiling $<  ->  $@" $(EOC)
-	@$(CC) $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
-$(OBJDIR_V)%.o:$(SRC_DIR_V)%.c
+$(OBJDIR_V)%.o:$(SRC_DIR_V)%.c $(HEADERS)
 	@echo $(WAVE) " - Compiling $<  ->  $@" $(EOC)
-	@$(CC) $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
-$(FT_LIB):
-	@make -C $(FT)
+$(LIBFT):
+	@make -C $(LIBFT_DIRECTORY)
 
-$(NAME): $(OBJ)
+$(NAME): $(LIBFT) obj $(OBJ)
 	@echo $(GREEN) " - Compiling $@" $(EOC)
-	@$(CC) $(OBJ) $(FT_LNK) -o $@
+	@$(CC) $(OBJ) $(LIBFT_LINK) -o $@
 
-$(NAME_V): $(OBJ_V)
+$(NAME_V): $(LIBFT) obj $(OBJ_V)
 	@echo $(GREEN) " - Compiling $@" $(EOC)
-	@$(CC) $(OBJ_V) $(FT_LNK) -o $@
+	@$(CC) $(OBJ_V) $(MLX_LINK) $(LIBFT_LINK) -o $@
 
 clean:
 	rm -rf obj/
@@ -71,6 +79,6 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 	rm -rf $(NAME_V)
-	make -C $(FT) fclean
+	make -C $(LIBFT_DIRECTORY) fclean
 
 re: fclean all
