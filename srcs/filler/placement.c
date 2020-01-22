@@ -6,20 +6,20 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 13:51:47 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/20 14:52:39 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/22 14:34:47 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
 
-int		pos_valid(t_filler f, t_point p)
+int			pos_valid(t_filler f, t_point p)
 {
 	return (p.x >= 0 && p.y >= 0 &&
 			p.x < f.board.width && p.y < f.board.hieght);
 }
 
-int		place_around(t_filler f, t_point p, t_point *res)
+int			place_around(t_filler f, t_point p, t_point *res)
 {
 	t_point		offset;
 
@@ -43,7 +43,7 @@ int		place_around(t_filler f, t_point p, t_point *res)
 	return (0);
 }
 
-void	place(t_filler f)
+void		place(t_filler f)
 {
 	t_point		piece;
 
@@ -61,7 +61,7 @@ void	place(t_filler f)
 	ft_putchar('\n');
 }
 
-int		try_place(t_filler f, t_point point)
+int			try_place(t_filler f, t_point point)
 {
 	t_point p;
 	int		count;

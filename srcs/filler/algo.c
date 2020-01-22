@@ -6,14 +6,14 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 17:05:33 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/20 14:52:47 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/22 14:33:55 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
 
-void			create_arr(t_filler *f)
+void		create_arr(t_filler *f)
 {
 	int		size;
 
@@ -29,7 +29,7 @@ void			create_arr(t_filler *f)
 	ft_bzero(f->buf_e, size * sizeof(t_point));
 }
 
-void			pop_arr(t_filler *f)
+void		pop_arr(t_filler *f)
 {
 	t_point	point;
 
@@ -52,9 +52,9 @@ void			pop_arr(t_filler *f)
 	}
 }
 
-int		calc_dist(t_point a, t_point b)
+int			calc_dist(t_point a, t_point b)
 {
-	return (MAX(a.x, b.x) - MIN(a.x, b.x) + 
+	return (MAX(a.x, b.x) - MIN(a.x, b.x) +
 				MAX(a.y, b.y) - MIN(a.y, b.y));
 }
 

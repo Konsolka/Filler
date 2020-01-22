@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 12:41:19 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/22 14:23:56 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/22 14:35:18 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "get_next_line.h"
 
-void	free_map(t_map *map)
+void		free_map(t_map *map)
 {
 	int		i;
 
@@ -29,7 +29,7 @@ void	free_map(t_map *map)
 	ft_memdel((void **)map->data);
 }
 
-void	read_map(char *line, int offset, t_map *map)
+void		read_map(char *line, int offset, t_map *map)
 {
 	int		i;
 
@@ -54,7 +54,7 @@ void	read_map(char *line, int offset, t_map *map)
 	}
 }
 
-void	init_filler(t_filler *filler)
+void		init_filler(t_filler *filler)
 {
 	t_point	p;
 
@@ -79,7 +79,7 @@ void	init_filler(t_filler *filler)
 	filler->init = 1;
 }
 
-void	filler_loop(t_filler filler)
+void		filler_loop(t_filler filler)
 {
 	char	*str;
 	int		res;

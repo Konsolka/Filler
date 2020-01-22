@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:43:47 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/22 13:41:47 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/22 17:33:36 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,27 @@
 #include "filler.h"
 #include "libft.h"
 
-void		del_node(t_vis *node)
+void		del_node(t_vis **node)
 {
 	int		i;
+	t_vis	*temp;
+
 	i = 0;
-	while (i < node->map.hieght)
-		ft_strdel(&node->map.data[i++]);
+	temp = *node;
+	while (i < temp->map.hieght)
+		ft_strdel(&temp->map.data[i++]);
 	i = 0;
-	while (i < node->piece.hieght)
-		ft_strdel(&node->piece.data[i++]);
-	node = NULL;
+	while (i < temp->piece.hieght)
+		ft_strdel(&temp->piece.data[i++]);
+	free(temp);
+	temp = NULL;
+	*node = temp;
 }
 
 void		del_list(t_vis_lst **lst)
 {
 	t_vis_lst	*v;
-	int			i;
+	t_vis		*vis;
 
 	v = *lst;
 	while (v->v->prev)
@@ -38,17 +43,10 @@ void		del_list(t_vis_lst **lst)
 	ft_strdel(&v->name_2);
 	while (v->v)
 	{
-		i = 0;
-		while (i < v->v->map.hieght)
-			ft_strdel(&v->v->map.data[i++]);
-		i = 0;
-		while (i < v->v->piece.hieght)
-			ft_strdel(&v->v->piece.data[i++]);
-		v->v = v->v->next;
-		if (!v->v)
-			break ;
-		free(v->v->prev);
-		v->v->prev = NULL;
+		vis = v->v->next;
+		del_node(&v->v);
+		free(v->v);
+		v->v = vis;
 	}
 	free(v);
 	*lst = v;
@@ -84,7 +82,7 @@ void		add_node(t_vis **lst, t_vis *node)
 	*lst = temp;
 }
 
-t_vis	*init_v()
+t_vis		*init_v(void)
 {
 	t_vis	*v;
 

@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 13:13:52 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/22 14:32:26 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/22 17:58:00 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 # define COLOR_AL_BLUE		0x00FFFF
 # define COLOR_OLIVE		0xC0C0C0
 # define COLOR_AL_GRAY		0x505050
-
+# define COLOR_BLACK		0x000000
+# define COLOR_YELLOW		0xFFFF00
 typedef struct	s_point
 {
 	int		x;
@@ -59,6 +60,12 @@ typedef struct	s_filler
 	int			p_count;
 	int			e_count;
 }				t_filler;
+
+typedef struct	s_coords
+{
+	int			x;
+	int			y;
+}				t_coords;
 
 t_point			closest_pair(t_filler f);
 void			place(t_filler f);
@@ -118,6 +125,6 @@ void			draw(t_vis_lst *v, t_mlx *mlx);
 t_vis			*init_v();
 int				parce_args(int ac, char **av);
 void			del_list(t_vis_lst **lst);
-void			del_node(t_vis *node);
-
+void			del_node(t_vis **node);
+void			draw_win(t_vis_lst *v, t_mlx *mlx);
 #endif
