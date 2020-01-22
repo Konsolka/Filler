@@ -74,11 +74,14 @@ $(NAME_V): $(LIBFT) obj $(OBJ_V)
 	@$(CC) $(OBJ_V) $(MLX_LINK) $(LIBFT_LINK) -o $@
 
 clean:
-	rm -rf obj/
+	@echo " - Deleting dir obj/"
+	@rm -rf obj/
 
 fclean: clean
-	rm -rf $(NAME)
-	rm -rf $(NAME_V)
-	make -C $(LIBFT_DIRECTORY) fclean
+	@echo " - Deleting $(NAME)"
+	@echo " - Deleting $(NAME_V)"
+	@rm -rf $(NAME)
+	@rm -rf $(NAME_V)
+	@make -C $(LIBFT_DIRECTORY) fclean
 
 re: fclean all

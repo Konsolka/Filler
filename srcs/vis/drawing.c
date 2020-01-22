@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 11:53:26 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/20 18:08:56 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/22 14:25:03 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	draw_square(int size_x, int size_y, int x, int y, t_mlx *mlx, int long colo
 	}
 }
 
-void	draw_names(t_vis v, t_mlx *mlx)
+void	draw_names(t_vis_lst v, t_mlx *mlx)
 {
 	mlx_string_put(mlx->ptr, mlx->win, WIDTH / 4, HIEGHT / 20, COLOR_RED, v.name_1);
 	mlx_string_put(mlx->ptr, mlx->win, WIDTH * 3 / 4, HIEGHT / 20, COLOR_BLUE, v.name_2);
@@ -46,6 +46,7 @@ void	draw_names(t_vis v, t_mlx *mlx)
 int		mlx_close(t_mlx *data)
 {
 	mlx_destroy_window(data->ptr, data->win);
+	del_list(&data->v);
 	exit(0);
 }
 
@@ -58,20 +59,28 @@ int		key_parce(int key, void *param)
 		mlx_close(param);
 	else if (key == 124)
 	{
-		if (data->v->next)
-			data->v = data->v->next;
-		draw(*data->v->v, data);
+		if (data->v->v->next)
+		{
+			data->v->v = data->v->v->next;
+			while (data->v->v->map.hieght == 0)
+				data->v->v = data->v->v->next;
+		}
+		draw(data->v, data);
 	}
 	else if (key == 123)
 	{
-		if (data->v->prev)
-			data->v = data->v->prev;
-		draw(*data->v->v, data);
-	}
+		if (data->v->v->prev)
+		{
+			data->v->v = data->v->v->prev;
+			while (data->v->v->map.hieght == 0)
+				data->v->v = data->v->v->prev;
+		}
+		draw(data->v, data);
+	}	
 	return (0);
 }
 
-int long	get_square_color(int x, int y, t_vis v, t_mlx *mlx)
+int long	get_square_color(int x, int y, t_vis v)
 {
 	char	letter;
 
@@ -87,33 +96,38 @@ int long	get_square_color(int x, int y, t_vis v, t_mlx *mlx)
 	return (COLOR_WHITE);
 }
 
-void	calc_score(t_vis v, t_mlx *mlx)
+void	calc_score(t_vis_lst *v, t_mlx *mlx)
 {
 	int		i;
+	int		score_1;
+	int		score_2;
 	int		j;
-	int		score_p1;
-	int		score_p2;
 	char	letter;
+	char	*num;
 
-	score_p1 = 0;
-	score_p2 = 0;
 	j = 0;
-	while (j < v.map.hieght)
+	score_1 = 0;
+	score_2 = 0;
+	while (j < v->v->map.hieght)
 	{
 		i = 0;
-		while (i < v.map.width)
+		while (i < v->v->map.width)
 		{
-			letter = v.map.data[j][i];
-			if (letter == 'O')
-				score_p1++;
-			else if (letter == 'X')
-				score_p2++;
+			letter = v->v->map.data[j][i];
+			if (letter == v->p1 + 32 || letter == v->p1)
+				score_1++;
+			else if (letter == v->p2 + 32 || letter == v->p2)
+				score_2++;
 			i++;
 		}
 		j++;
 	}
-	mlx_string_put(mlx->ptr, mlx->win, WIDTH * 2 / 5, HIEGHT / 20, COLOR_RED, ft_itoa(score_p1));
-	mlx_string_put(mlx->ptr, mlx->win, WIDTH * 3 / 5, HIEGHT / 20, COLOR_BLUE, ft_itoa(score_p2));
+	num = ft_itoa(score_1);
+	mlx_string_put(mlx->ptr, mlx->win, WIDTH * 2 / 5, HIEGHT / 20, COLOR_RED, num);
+	ft_strdel(&num);
+	num = ft_itoa(score_2);
+	mlx_string_put(mlx->ptr, mlx->win, WIDTH * 3 / 5, HIEGHT / 20, COLOR_BLUE, num);
+	ft_strdel(&num);
 }
 
 void	draw_v_squares(t_vis v, t_mlx *mlx)
@@ -124,9 +138,10 @@ void	draw_v_squares(t_vis v, t_mlx *mlx)
 	int		j;
 	int		start_x;
 	int		start_y;
-	int		temp;
 
 	j = 1;
+	if (v.map.hieght == 0)
+		return ;
 	x = (int)((HIEGHT - HIEGHT * 3 / 10) / ((v.map.width > v.map.hieght) ? v.map.width : v.map.hieght)) - 5;
 	y = (int)((WIDTH - WIDTH * 3 / 10) / ((v.map.width > v.map.hieght) ? v.map.width : v.map.hieght)) - 5;
 	start_y = HIEGHT / 20 + 30;
@@ -136,7 +151,7 @@ void	draw_v_squares(t_vis v, t_mlx *mlx)
 		i = 1;
 		while (i <= v.map.width)
 		{
-			draw_square(x, y, start_x, start_y, mlx, get_square_color(i, j, v, mlx));
+			draw_square(x, y, start_x, start_y, mlx, get_square_color(i, j, v));
 			i++;
 			start_x += x + 1;
 		}
@@ -145,24 +160,33 @@ void	draw_v_squares(t_vis v, t_mlx *mlx)
 	}
 }
 
-void	draw(t_vis v, t_mlx *mlx)
+void	draw_move(t_vis_lst *v, t_mlx *mlx)
 {
-		int	i = 0;
-	while (i < v.map.hieght)
-	{
-		ft_putstr(v.map.data[i]);
-		ft_putchar('\n');
-		i++;
-	}
+	char	*num;
+	mlx_string_put(mlx->ptr, mlx->win, (int)(0.2 * WIDTH), (int)HIEGHT * 0.7 - 20, COLOR_WHITE, "Move:");
+	mlx_string_put(mlx->ptr, mlx->win, (int)(0.2 * WIDTH) + 55, (int)HIEGHT * 0.7 - 20, COLOR_WHITE, v->v->move.p);
+	mlx_string_put(mlx->ptr, mlx->win, (int)(0.2 * WIDTH) + 80, (int)HIEGHT * 0.7 - 20, COLOR_WHITE, "x=");
+	num = ft_itoa(v->v->move.w);
+	mlx_string_put(mlx->ptr, mlx->win, (int)(0.2 * WIDTH) + 100, (int)HIEGHT * 0.7 - 20, COLOR_WHITE, num);
+	ft_strdel(&num);
+	mlx_string_put(mlx->ptr, mlx->win, (int)(0.2 * WIDTH) + 80, (int)HIEGHT * 0.7 - 5, COLOR_WHITE, "y=");
+	num = ft_itoa(v->v->move.h);
+	mlx_string_put(mlx->ptr, mlx->win, (int)(0.2 * WIDTH) + 100, (int)HIEGHT * 0.7 - 5, COLOR_WHITE, num);
+	ft_strdel(&num);
+
+}
+
+void	draw(t_vis_lst *v, t_mlx *mlx)
+{
 	mlx->img = mlx_new_image(mlx->ptr, WIDTH, HIEGHT);
 	mlx->line = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->line_size, &mlx->ed);
 	draw_square(1000, 1000, 0, 0, mlx, COLOR_AL_GRAY);
-	draw_v_squares(v, mlx);
+	draw_v_squares(*v->v, mlx);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img, 0, 0);
-	if (v.name_1)
-		draw_names(v, mlx);
-	calc_score(v, mlx);
 	mlx_destroy_image(mlx->ptr, mlx->img);
+	calc_score(v, mlx);
+	draw_move(v, mlx);
+	draw_names(*v, mlx);
 }
 
 void	init_window(t_vis_lst *v)
@@ -172,7 +196,7 @@ void	init_window(t_vis_lst *v)
 	mlx.ptr = mlx_init();
 	mlx.win = mlx_new_window(mlx.ptr, WIDTH, HIEGHT, "Filler");
 	mlx.v = v;
-	draw(*mlx.v->v, &mlx);
+	draw(v, &mlx);
 	mlx_key_hook(mlx.win, key_parce, &mlx);
 	mlx_loop(mlx.ptr);
 }

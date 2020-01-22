@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:35:01 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/20 18:01:09 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/22 14:22:58 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,48 @@
 #include "filler.h"
 #include "libft.h"
 #include "get_next_line.h"
+#include <fcntl.h>
+#include <unistd.h>
 
-int		main(void)
+int		main(int ac, char **av)
 {
 	char		*line;
-	char		*name;
 	t_vis_lst	*lst;
 	t_vis		*v;
+	int			fd;
 
 	line = NULL;
-	lst = NULL;
-	v = (t_vis *)malloc(sizeof(t_vis));
-	while (get_next_line(0, &line))
+	v = init_v();
+	lst = init_lst(v);
+	fd = parce_args(ac, av);
+	while (get_next_line(fd, &line) > 0)
 	{
-		if (!ft_strncmp(line, "$$$ exec p1", 11))
-		{
-			v->p1 = 'O';
-			v->name_1 = parce_name(line);
-		}
-		else if (!ft_strncmp(line, "$$$ exec p2", 11))
-		{
-			v->p2 = 'X';
-			v->name_2 = parce_name(line);
-		}
+		lst->p1 = 'O';
+		lst->p2 = 'X';
+		if (!ft_strncmp(line, "$$$ exec p1 ", 12))
+			lst->name_1 = parce_name(line);
+		else if (!ft_strncmp(line, "$$$ exec p2 ", 12))
+			lst->name_2 = parce_name(line);
 		else if (!ft_strncmp(line, "Plateau ", 8))
-			parce_token(line, 4, &v->map);
+			parce_token(line, 4, &v->map, fd);
 		else if (!ft_strncmp(line, "Piece ", 6))
-			parce_token(line, 0, &v->piece);
+			parce_token(line, 0, &v->piece, fd);
 		else if (!ft_strncmp(line, "<got ", 5))
 		{
 			parce_move(line, &v->move);
-			add_node(&lst, create_node(v));
-			v = (t_vis *)malloc(sizeof(t_vis));
+			v->next = init_v();
+			v->next->prev = v;
+			v = v->next;
+			ft_putstr(line);
+			ft_putchar('\n');
 		}
 		ft_strdel(&line);
 	}
+	if (get_next_line(fd, &line) < 0)
+		ft_putstr_err("file error\n");
+	v = v->prev;
+	del_node(v->next);
+	close(fd);
 	init_window(lst);
-	// printf("name p1 %c = %s\nname p2 %c = %s", v.p1, v.name_1, v.p2, v.name_2);
-	// printf("\nmap->hieght = %i\nmap->width = %i\npiece->hieght = %i\npiece->width = %i\nmove->h = %i\nmove->w = %i\nmove->p = %c", v.map.hieght, v.map.width, v.piece.hieght, v.piece.width, v.move.h, v.move.w, v.move.p);
 	return (0);
 }

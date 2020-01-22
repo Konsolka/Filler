@@ -6,18 +6,18 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 13:13:52 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/20 17:27:53 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/22 14:32:26 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
 
-# define HIEGHT 1000
-# define WIDTH 1000
 # define MAX(A, B)(A > B ? A : B)
 # define MIN(A, B)(A < B ? A : B)
 
+# define HIEGHT 1000
+# define WIDTH 1000
 # define COLOR_WHITE		0xFFFFFF
 # define COLOR_RED			0xFF0000
 # define COLOR_AL_RED		0xFFA500
@@ -25,6 +25,7 @@
 # define COLOR_AL_BLUE		0x00FFFF
 # define COLOR_OLIVE		0xC0C0C0
 # define COLOR_AL_GRAY		0x505050
+
 typedef struct	s_point
 {
 	int		x;
@@ -59,54 +60,64 @@ typedef struct	s_filler
 	int			e_count;
 }				t_filler;
 
-t_point		closest_pair(t_filler f);
-void	place(t_filler f);
-t_point		find_place(t_filler f);
-int		try_place(t_filler f, t_point point);
-int		place_around(t_filler f, t_point p, t_point *res);
+t_point			closest_pair(t_filler f);
+void			place(t_filler f);
+t_point			find_place(t_filler f);
+int				try_place(t_filler f, t_point point);
+int				place_around(t_filler f, t_point p, t_point *res);
+
+/*
+**	VISUALIZATION
+*/
 
 typedef struct	s_move
 {
 	int		h;
 	int		w;
-	char	p;
+	char	p[2];
 }				t_move;
 
 typedef struct	s_vis
+{
+	t_map			map;
+	t_map			piece;
+	t_move			move;
+	struct s_vis	*next;
+	struct s_vis	*prev;
+}				t_vis;
+
+typedef	struct	s_vis_lst
 {
 	char	p1;
 	char	p2;
 	char	*name_1;
 	char	*name_2;
-	t_map	map;
-	t_map	piece;
-	t_move	move;
-}				t_vis;
-
-typedef	struct	s_vis_lst
-{
-	t_vis				*v;
-	struct s_vis_lst	*next;
-	struct s_vis_lst	*prev;
+	t_vis	*v;
 }				t_vis_lst;
 
 typedef	struct	s_mlx
 {
-	void	*ptr;
-	void	*win;
-	void	*img;
-	int		bpp;
-	int		line_size;
-	int		ed;
-	char	*line;
+	void		*ptr;
+	void		*win;
+	void		*img;
+	int			bpp;
+	int			line_size;
+	int			ed;
+	char		*line;
 	t_vis_lst	*v;
 }				t_mlx;
 
-void	parce_token(char *line, int offset, t_map *map);
-void	parce_move(char *line, t_move *move);
-char	*parce_name(char *line);
-void	init_window(t_vis_lst *v);
-t_vis_lst	*create_node(t_vis *v);
-void		add_node(t_vis_lst **lst, t_vis_lst *node);
-void	draw(t_vis v, t_mlx *mlx);
+void			parce_token(char *line, int offset, t_map *map, int fd);
+void			parce_move(char *line, t_move *move);
+char			*parce_name(char *line);
+void			init_window(t_vis_lst *v);
+void			init_window(t_vis_lst *v);
+void			add_node(t_vis **lst, t_vis *node);
+t_vis_lst		*init_lst(t_vis *v);
+void			draw(t_vis_lst *v, t_mlx *mlx);
+t_vis			*init_v();
+int				parce_args(int ac, char **av);
+void			del_list(t_vis_lst **lst);
+void			del_node(t_vis *node);
+
 #endif
