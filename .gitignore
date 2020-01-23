@@ -1,3 +1,6 @@
 *.o
 filler.trace
 mburl.filler
+test.sh
+vis
+libft.a

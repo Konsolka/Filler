@@ -1,0 +1,104 @@
+main player ../mburl.filler
+
+		player 1 = ./players/abanlin.filler
+	map = ./maps/map00
+../mburl.filler won
+../mburl.filler won
+./players/abanlin.filler won
+../mburl.filler won
+../mburl.filler won
+==== On map {./maps/map00} (../mburl.filler) wins [4]	(./players/abanlin.filler) wins [1] ====
+
+	map = ./maps/map01
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+==== On map {./maps/map01} (../mburl.filler) wins [5]	(./players/abanlin.filler) wins [0] ====
+
+		player 2 = ./players/carli.filler
+	map = ./maps/map00
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+==== On map {./maps/map00} (../mburl.filler) wins [5]	(./players/carli.filler) wins [0] ====
+
+	map = ./maps/map01
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+./players/carli.filler won
+==== On map {./maps/map01} (../mburl.filler) wins [4]	(./players/carli.filler) wins [1] ====
+
+		player 3 = ./players/champely.filler
+	map = ./maps/map00
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+==== On map {./maps/map00} (../mburl.filler) wins [5]	(./players/champely.filler) wins [0] ====
+
+	map = ./maps/map01
+./players/champely.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+==== On map {./maps/map01} (../mburl.filler) wins [4]	(./players/champely.filler) wins [1] ====
+
+		player 4 = ./players/grati.filler
+	map = ./maps/map00
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+==== On map {./maps/map00} (../mburl.filler) wins [5]	(./players/grati.filler) wins [0] ====
+
+	map = ./maps/map01
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+./players/grati.filler won
+==== On map {./maps/map01} (../mburl.filler) wins [4]	(./players/grati.filler) wins [1] ====
+
+		player 5 = ./players/hcao.filler
+	map = ./maps/map00
+../mburl.filler won
+./players/hcao.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+==== On map {./maps/map00} (../mburl.filler) wins [4]	(./players/hcao.filler) wins [1] ====
+
+	map = ./maps/map01
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+==== On map {./maps/map01} (../mburl.filler) wins [5]	(./players/hcao.filler) wins [0] ====
+
+		player 6 = ./players/superjeannot.filler
+	map = ./maps/map00
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+==== On map {./maps/map00} (../mburl.filler) wins [5]	(./players/superjeannot.filler) wins [0] ====
+
+	map = ./maps/map01
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+../mburl.filler won
+./players/superjeannot.filler won
+==== On map {./maps/map01} (../mburl.filler) wins [4]	(./players/superjeannot.filler) wins [1] ====
+
