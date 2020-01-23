@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:39:05 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/20 14:45:11 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/23 14:45:47 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <string.h>
 # include <stdlib.h>
+
 typedef struct		s_list
 {
 	void			*content;
@@ -51,7 +52,7 @@ char				*ft_strncat(char *s1, const char *s2, size_t n);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
 char				*ft_strnstr(const char *haystack,
-		const char *needle, size_t len);
+									const char *needle, size_t len);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strstr(const char *str, const char *needle);
 void				*ft_memalloc(size_t size);

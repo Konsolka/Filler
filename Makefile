@@ -1,12 +1,12 @@
 NAME		= mburl.filler
 NAME_V		= vis
 
-# compiler
+# COMPIER
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -g
+CFLAGS		= -Wall -Wextra -Werror
 
-# colors
+# COLORS
 
 RED			:= "\033[31m"
 WAVE		:= "\033[36m"
@@ -14,7 +14,7 @@ EOC			:= "\033[0m"
 BLINK		:= "\033[5m"
 GREEN		:= "\033[32m"
 
-# srcs and obj
+# SRCS & OBJ
 
 SRCS		=	main.c\
 				algo.c\
@@ -31,30 +31,39 @@ SRCS_V		=	main_vis.c\
 OBJ			= $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 OBJ_V		= $(addprefix $(OBJDIR_V),$(SRCS_V:.c=.o))
 
-# directories
+# HEADERS
 
 HEADER_LIST		= filler.h
-INCDIR			= ./includes/
 HEADERS			= $(addprefix $(INCDIR), $(HEADER_LIST))
+
+# DIRECTORIES
+
+INCDIR			= ./includes/
 
 SRC_DIR			= ./srcs/filler/
 SRC_DIR_V		= ./srcs/vis/
 
+OBJDIR_M		= ./obj/
 OBJDIR			= ./obj/filler/
 OBJDIR_V		= ./obj/vis/
 
-# ft library
+# FT LIBRARY
 
 LIBFT			= $(LIBFT_DIRECTORY)libft.a
 LIBFT_DIRECTORY = ./libft/
 LIBFT_HEADERS	= $(LIBFT_DIRECTORY)includes/
 LIBFT_LINK		=  -lft -L$(LIBFT_DIRECTORY)
-# mlx library
+
+# MLX LIBRARY
+
 MLX_LINK		= -I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
-# include
+# INCLUDES
+
 INCLUDES		= -I $(INCDIR) -I $(LIBFT_HEADERS)
 INCLUDES_V		= -I $(INCDIR) -I $(LIBFT_HEADERS) $(MLX_LINK)
+
+
 all: $(NAME) $(NAME_V)
 
 obj:
@@ -84,7 +93,7 @@ $(NAME_V): $(LIBFT) obj $(OBJ_V)
 
 clean:
 	@echo	" - Deleting dir obj/"
-	@rm -rf obj/
+	@rm -rf $(OBJDIR_M)
 
 fclean: clean
 	@echo	" - Deleting $(NAME)"
@@ -94,3 +103,5 @@ fclean: clean
 	@make -C $(LIBFT_DIRECTORY) fclean
 
 re: fclean all
+
+.PHONY: all obj clean fclean re
