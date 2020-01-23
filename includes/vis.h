@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:39:12 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/23 16:47:10 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/23 16:52:53 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define HIEGHT 1000
 # define WIDTH 1000
+
 # define COLOR_WHITE		0xFFFFFF
 # define COLOR_RED			0xFF0000
 # define COLOR_AL_RED		0xFFA500
