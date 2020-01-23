@@ -6,12 +6,12 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 14:16:10 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/23 14:22:59 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/23 16:44:23 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
-#include "filler.h"
+#include "vis.h"
 #include "libft.h"
 
 int long	get_square_color(int x, int y, t_vis v)

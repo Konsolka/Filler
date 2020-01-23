@@ -6,12 +6,12 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:43:47 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/22 17:33:36 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/23 16:44:45 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "filler.h"
+#include "vis.h"
 #include "libft.h"
 
 void		del_node(t_vis **node)

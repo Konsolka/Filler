@@ -6,13 +6,13 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 11:53:26 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/23 14:16:43 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/23 16:44:36 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <unistd.h>
-#include "filler.h"
+#include "vis.h"
 #include "libft.h"
 
 int			mlx_close(t_mlx *data)

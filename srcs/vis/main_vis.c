@@ -6,16 +6,16 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:35:01 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/23 13:54:14 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/23 16:46:52 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "filler.h"
-#include "libft.h"
-#include "get_next_line.h"
 #include <fcntl.h>
 #include <unistd.h>
+#include "vis.h"
+#include "libft.h"
+#include "get_next_line.h"
 
 void	make_got(t_vis **v_main, char *line)
 {

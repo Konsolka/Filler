@@ -6,11 +6,11 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 14:06:21 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/23 14:20:33 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/23 16:44:41 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
+#include "vis.h"
 #include "libft.h"
 
 void		move_right(t_mlx *data)

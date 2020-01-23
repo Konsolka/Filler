@@ -6,13 +6,13 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 14:12:23 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/23 14:26:42 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/23 16:44:30 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "libft.h"
-#include "filler.h"
+#include "vis.h"
 
 void		draw_move(t_vis_lst *v, t_mlx *mlx)
 {

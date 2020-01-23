@@ -6,18 +6,18 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 18:39:12 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/23 14:29:27 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/23 16:45:02 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include "filler.h"
-#include "libft.h"
-#include "get_next_line.h"
 #include <sys/types.h>
 #include <sys/uio.h>
+#include "vis.h"
+#include "libft.h"
+#include "get_next_line.h"
 
 int		parce_args(int ac, char **av)
 {
