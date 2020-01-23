@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 13:51:47 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/22 14:34:47 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/23 13:51:31 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void		place(t_filler f)
 {
 	t_point		piece;
 
-	piece = closest_pair(f);
+	piece = closest_pair(&f);
+	del_buf(&f);
 	if (!pos_valid(f, piece))
 	{
 		piece.x = 0;

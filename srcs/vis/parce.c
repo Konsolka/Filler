@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 18:39:12 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/22 17:44:34 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/23 14:29:27 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include "get_next_line.h"
 #include <sys/types.h>
 #include <sys/uio.h>
-
 
 int		parce_args(int ac, char **av)
 {

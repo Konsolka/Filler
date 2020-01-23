@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 12:41:19 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/22 14:35:18 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/23 14:40:45 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,29 @@
 #include "libft.h"
 #include "get_next_line.h"
 
-void		free_map(t_map *map)
+void		free_map(t_map *map, int offset)
 {
 	int		i;
+	char	*str;
 
 	if (!map->data)
 		return ;
 	i = 0;
 	while (i < map->hieght)
 	{
-		ft_strdel(&map->data[i]);
+		str = map->data[i] - offset;
+		ft_strdel(&str);
 		i++;
 	}
-	ft_memdel((void **)map->data);
+	if (map->data)
+		ft_memdel((void **)&map->data);
 }
 
 void		read_map(char *line, int offset, t_map *map)
 {
 	int		i;
 
-	free_map(map);
+	free_map(map, offset);
 	line = ft_strchr(line, ' ') + 1;
 	map->hieght = ft_atoi(line);
 	map->width = ft_atoi(ft_strchr(line, ' '));
@@ -43,13 +46,12 @@ void		read_map(char *line, int offset, t_map *map)
 		get_next_line(0, &line);
 		ft_strdel(&line);
 	}
-	map->data = (char **)malloc(sizeof(char *) * map->hieght);
+	map->data = (char **)ft_memalloc(map->hieght * sizeof(char *));
 	i = 0;
 	while (i < map->hieght)
 	{
 		get_next_line(0, &line);
-		map->data[i] = ft_strdup(line + offset);
-		ft_strdel(&line);
+		map->data[i] = line + offset;
 		i++;
 	}
 }

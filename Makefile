@@ -1,25 +1,34 @@
-NAME	= mburl.filler
-NAME_V	= vis
+NAME		= mburl.filler
+NAME_V		= vis
 
 # compiler
 
-CC		= gcc
-CFLAGS	= -Wall -Wextra -g
+CC			= gcc
+CFLAGS		= -Wall -Wextra -g
 
 # colors
 
-RED		:= "\033[31m"
-WAVE	:= "\033[36m"
-EOC		:= "\033[0m"
-BLINK	:= "\033[5m"
-GREEN	:= "\033[32m"
+RED			:= "\033[31m"
+WAVE		:= "\033[36m"
+EOC			:= "\033[0m"
+BLINK		:= "\033[5m"
+GREEN		:= "\033[32m"
 
 # srcs and obj
 
-SRCS		= main.c algo.c placement.c
-SRCS_V		= main_vis.c parce.c drawing.c lst_work.c
+SRCS		=	main.c\
+				algo.c\
+				placement.c
 
-OBJ		= $(addprefix $(OBJDIR),$(SRCS:.c=.o))
+SRCS_V		=	main_vis.c\
+				parce.c\
+				drawing.c\
+				lst_work.c\
+				key_parsing.c\
+				draw_help.c\
+				calculations.c
+
+OBJ			= $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 OBJ_V		= $(addprefix $(OBJDIR_V),$(SRCS_V:.c=.o))
 
 # directories
@@ -49,8 +58,8 @@ INCLUDES_V		= -I $(INCDIR) -I $(LIBFT_HEADERS) $(MLX_LINK)
 all: $(NAME) $(NAME_V)
 
 obj:
-	@echo " - Creating dir $(OBJDIR)"
-	@echo " - Creating dir $(OBJDIR_V)"
+	@echo 		" - Creating dir $(OBJDIR)"
+	@echo 		" - Creating dir $(OBJDIR_V)"
 	@mkdir -p $(OBJDIR)
 	@mkdir -p $(OBJDIR_V)
 
@@ -74,12 +83,12 @@ $(NAME_V): $(LIBFT) obj $(OBJ_V)
 	@$(CC) $(OBJ_V) $(MLX_LINK) $(LIBFT_LINK) -o $@
 
 clean:
-	@echo " - Deleting dir obj/"
+	@echo	" - Deleting dir obj/"
 	@rm -rf obj/
 
 fclean: clean
-	@echo " - Deleting $(NAME)"
-	@echo " - Deleting $(NAME_V)"
+	@echo	" - Deleting $(NAME)"
+	@echo	" - Deleting $(NAME_V)"
 	@rm -rf $(NAME)
 	@rm -rf $(NAME_V)
 	@make -C $(LIBFT_DIRECTORY) fclean

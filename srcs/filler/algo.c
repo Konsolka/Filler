@@ -6,24 +6,29 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 17:05:33 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/22 14:33:55 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/23 13:50:26 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
+#include <stdio.h>
+
+void		del_buf(t_filler *f)
+{
+	if (f->buf_p)
+		ft_memdel((void **)&f->buf_p);
+	if (f->buf_e)
+		ft_memdel((void **)&f->buf_e);
+}
 
 void		create_arr(t_filler *f)
 {
 	int		size;
 
-	if (f->buf_p)
-		ft_memdel((void **)&f->buf_p);
-	if (f->buf_e)
-		ft_memdel((void **)&f->buf_e);
 	size = f->board.size;
-	if (!(f->buf_p = ft_memalloc(size * sizeof(t_point))) ||
-			!(f->buf_e = ft_memalloc(size * sizeof(t_point))))
+	if (!(f->buf_p = (t_point *)ft_memalloc(size * sizeof(t_point))) ||
+			!(f->buf_e = (t_point *)ft_memalloc(size * sizeof(t_point))))
 		exit(1);
 	ft_bzero(f->buf_p, size * sizeof(t_point));
 	ft_bzero(f->buf_e, size * sizeof(t_point));
@@ -58,7 +63,7 @@ int			calc_dist(t_point a, t_point b)
 				MAX(a.y, b.y) - MIN(a.y, b.y));
 }
 
-t_point		closest_pair(t_filler f)
+t_point		closest_pair(t_filler *f)
 {
 	int		p_cur;
 	int		e_cur;
@@ -66,23 +71,23 @@ t_point		closest_pair(t_filler f)
 	t_point	p;
 	int		dist;
 
-	pop_arr(&f);
-	dist = f.board.size;
+	pop_arr(f);
+	dist = f->board.size;
 	p_cur = 0;
-	while (p_cur < f.p_count)
+	while (p_cur < f->p_count)
 	{
 		e_cur = 0;
-		while (e_cur < f.e_count)
+		while (e_cur < f->e_count)
 		{
-			if (calc_dist(f.buf_p[p_cur], f.buf_e[e_cur]) <= dist &&
-					place_around(f, f.buf_p[p_cur], &temp))
+			if (calc_dist(f->buf_p[p_cur], f->buf_e[e_cur]) <= dist &&
+					place_around(*f, f->buf_p[p_cur], &temp))
 			{
 				p = temp;
-				dist = calc_dist(f.buf_p[p_cur], f.buf_e[e_cur]);
+				dist = calc_dist(f->buf_p[p_cur], f->buf_e[e_cur]);
 			}
 			e_cur++;
 		}
 		p_cur++;
 	}
-	return (dist == f.board.size ? find_place(f) : p);
+	return (dist == f->board.size ? find_place(*f) : p);
 }

@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 16:35:01 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/22 17:55:16 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/23 13:54:14 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	read_file(int fd, t_vis **v_m, t_vis_lst **lst)
 			make_got(&v, line);
 		ft_strdel(&line);
 	}
+	v = v->prev;
+	del_node(&v->next);
 	*v_m = v;
 }
 
@@ -79,9 +81,6 @@ int		main(int ac, char **av)
 	v = init_v();
 	lst = init_lst(v);
 	read_file(fd, &v, &lst);
-	v = v->prev;
-	del_node(&v->next);
-	v->next = NULL;
 	close(fd);
 	init_window(lst);
 	return (0);

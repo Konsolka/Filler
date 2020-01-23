@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 13:13:52 by mburl             #+#    #+#             */
-/*   Updated: 2020/01/22 17:58:00 by mburl            ###   ########.fr       */
+/*   Updated: 2020/01/23 14:20:47 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define COLOR_AL_GRAY		0x505050
 # define COLOR_BLACK		0x000000
 # define COLOR_YELLOW		0xFFFF00
+
 typedef struct	s_point
 {
 	int		x;
@@ -67,11 +68,14 @@ typedef struct	s_coords
 	int			y;
 }				t_coords;
 
-t_point			closest_pair(t_filler f);
-void			place(t_filler f);
+t_point			closest_pair(t_filler *f);
 t_point			find_place(t_filler f);
 int				try_place(t_filler f, t_point point);
 int				place_around(t_filler f, t_point p, t_point *res);
+void			place(t_filler f);
+void			free_map(t_map *map, int offset);
+void			filler_free(t_filler *f);
+void			del_buf(t_filler *f);
 
 /*
 **	VISUALIZATION
@@ -114,6 +118,11 @@ typedef	struct	s_mlx
 	t_vis_lst	*v;
 }				t_mlx;
 
+int				mlx_close(t_mlx *data);
+int				key_parce(int key, void *param);
+int long		get_square_color(int x, int y, t_vis v);
+void			calc_score(t_vis_lst *v, t_mlx *mlx);
+void			calc_score_win(t_vis_lst *v, t_mlx *mlx);
 void			parce_token(char *line, int offset, t_map *map, int fd);
 void			parce_move(char *line, t_move *move);
 char			*parce_name(char *line);
@@ -124,7 +133,15 @@ t_vis_lst		*init_lst(t_vis *v);
 void			draw(t_vis_lst *v, t_mlx *mlx);
 t_vis			*init_v();
 int				parce_args(int ac, char **av);
+void			draw_v_squares(int start_y, t_vis v, t_mlx *mlx);
 void			del_list(t_vis_lst **lst);
 void			del_node(t_vis **node);
 void			draw_win(t_vis_lst *v, t_mlx *mlx);
+void			draw_names(t_vis_lst v, t_mlx *mlx);
+void			draw_keys(t_mlx *mlx);
+void			draw_move(t_vis_lst *v, t_mlx *mlx);
+void			draw_square(t_coords size, t_coords coords,
+							t_mlx *mlx, int long color);
+void			put_score_and_win(int score_1, int score_2,
+								t_vis_lst *v, t_mlx *mlx);
 #endif
