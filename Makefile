@@ -14,19 +14,18 @@ EOC				:=	"\033[0m"
 BLINK			:=	"\033[5m"
 GREEN			:=	"\033[32m"
 
+
+# SCRIPT
+
+SCRIPT_DIR		=	scripts/
+
+
 # SRCS & OBJ
 
-SRCS			=	main.c\
-					algo.c\
-					placement.c
+SRCS			:=	main.c algo.c placement.c
 
-SRCS_V			=	main_vis.c\
-					parce.c\
-					drawing.c\
-					lst_work.c\
-					key_parsing.c\
-					draw_help.c\
-					calculations.c
+SRCS_V			:=	main_vis.c parce.c drawing.c lst_work.c
+SRCS_V			+=	key_parsing.c draw_help.c calculations.c
 
 OBJ				=	$(addprefix $(OBJDIR),$(SRCS:.c=.o))
 OBJ_V			=	$(addprefix $(OBJDIR_V),$(SRCS_V:.c=.o))
@@ -59,7 +58,8 @@ LIBFT_LINK		=	 -lft -L$(LIBFT_DIRECTORY)
 
 # MLX LIBRARY
 
-MLX_LINK		=	-I /usr/local/include -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
+MLX_LINK		:=	-I /usr/local/include -L /usr/local/lib
+MLX_LINK		+=	-lmlx -framework OpenGL -framework AppKit
 
 # INCLUDES
 
@@ -76,11 +76,11 @@ obj:
 	@mkdir -p $(OBJDIR_V)
 
 $(OBJDIR)%.o:$(SRC_DIR)%.c $(HEADERS)
-	@echo $(WAVE) " - Compiling $<  ->  $@" $(EOC)
+	@printf "\e[1;34m - Compiling %-23s  ->  %-23s\n\e[m" "$<" "$@"
 	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
 $(OBJDIR_V)%.o:$(SRC_DIR_V)%.c $(HEADERS_V)
-	@echo $(WAVE) " - Compiling $<  ->  $@" $(EOC)
+	@printf "\e[1;34m - Compiling %-23s  ->  %-23s\n\e[m" "$<" "$@"
 	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
 $(LIBFT):
@@ -98,6 +98,7 @@ clean:
 	@echo " - Deleting $(OBJDIR_M)"
 	@rm -rf $(OBJDIR_M)
 
+
 fclean: clean
 	@echo " - Deleting $(NAME)"
 	@echo " - Deleting $(NAME_V)"
@@ -105,7 +106,20 @@ fclean: clean
 	@rm -rf $(NAME)
 	@rm -rf $(NAME_V)
 	@make -C $(LIBFT_DIRECTORY) fclean
-
 re: fclean all
+
+
+play5: $(NAME)
+	@sh $(SCRIPT_DIR)play_5_games.sh
+
+cleanlog:
+	@sh $(SCRIPT_DIR)clean.sh
+
+gamelog:
+	@sh $(SCRIPT_DIR)game_log_file.sh
+
+norm:
+	@sh $(SCRIPT_DIR)norm.sh
+ffclean: fclean cleanlog
 
 .PHONY: all obj clean fclean re

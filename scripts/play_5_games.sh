@@ -20,6 +20,8 @@ echo "==== Be patient ===="
 echo "Player 1 is $player_1\n" > $game_log
 for player_2 in "$(find . -name "players" -type d)"/*
 do
+	echo "---------------------------------------------------------"
+	echo "---------------------------------------------------------" >> $game_log
 	echo "Player $player_num = $player_2"
 	echo "Player $player_num = $player_2" >> $game_log
 	for map in "$(find . -name "maps" -type d)"/*
@@ -69,8 +71,6 @@ do
 		echo
 		echo >> $game_log
 	done
-	echo
-	echo >> $game_log
 	player_num=$(( $player_num + 1 ))
 done
 echo "~~~~ Done! Check $game_log for additional info ~~~~"

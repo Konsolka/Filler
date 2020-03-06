@@ -1,7 +1,7 @@
 files="$(find . -name "*.log")"
 files_trace="$(find . -name "filler.trace")"
 if [ "$files" = "" ]; then
-	echo " - No *.log files were found or they do not exist"
+	echo " - Nothing to clean :)"
 else
 	echo " - Deliting"
 	find . -name "*.log"

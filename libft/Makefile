@@ -6,7 +6,7 @@
 #    By: mburl <mburl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/04 19:30:25 by mburl             #+#    #+#              #
-#    Updated: 2020/01/23 10:52:53 by mburl            ###   ########.fr        #
+#    Updated: 2020/03/06 12:55:17 by mburl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ obj:
 	@mkdir -p $(OBJDIR)
 
 $(OBJDIR)%.o:$(SRCSDIR)%.c $(HEADERS)
-	@echo $(WAVE) " - Compiling $<  ->  $@" $(EOC)
+	@printf "\e[1;34m - Compiling %-23s  ->  %-23s\n\e[m" "$<" "$@"
 	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
 $(NAME): $(OBJ)
